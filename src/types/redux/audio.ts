@@ -1,17 +1,31 @@
 import { FetchError } from "./error";
 export type ownerId = string;
 
-// for creating in forms
-export interface AudioCreationCreds {
+// audioStateMixin
+
+export interface AudioMixin {
   author: string;
   compositionName: string;
-  ownerName: string;
   lyrics: string;
+}
+
+export interface AudioCreationDefaultState extends AudioMixin {
+  audioFile: File;
+}
+
+ 
+
+// for creating in forms
+export interface AudioFormData extends AudioCreationDefaultState {
+  ownerName: string;
 }
 
 // recieving from backend
 // for fetching and updating
-export interface AudioData extends AudioCreationCreds {
+
+type excludedAudioKey = "audioFile";
+//  all keys except audioFile (cause we covert it to  filename and fileId)
+export interface AudioData extends Omit<AudioFormData, excludedAudioKey> {
   _id: number; // after creation
   filename: string;
   fileId: string;
@@ -20,8 +34,15 @@ export interface AudioData extends AudioCreationCreds {
   ownerId: ownerId;
 }
 
+// its because we could have mush more 
+export type AudioCreationState = AudioData | AudioCreationDefaultState;
+// extends AudioCreationDefaultState {
+//   [index: string]: any;
+// }
+
+
 export interface AudioState {
-  audios: AudioData[] | []; // null
+  audios: AudioData[] | null; // null
 }
 
 export enum AudioActionTypes {

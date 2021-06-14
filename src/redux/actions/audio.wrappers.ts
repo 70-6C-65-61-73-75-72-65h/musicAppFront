@@ -1,4 +1,4 @@
-import { AudioCreationCreds } from "./../../types/redux/audio";
+import { AudioFormData } from "./../../types/redux/audio";
 import { SetFetching } from "../../types/redux/fetching";
 
 import { CustomWithFetchingWithError } from "./mixins";
@@ -27,7 +27,7 @@ export function fetchAllAudio(
 }
 
 export function createAudioCard(
-  audioCardData: AudioCreationCreds,
+  audioCardData: AudioFormData,
   router: History,
   setFetching: SetFetching,
   message: string = `Create audio card`

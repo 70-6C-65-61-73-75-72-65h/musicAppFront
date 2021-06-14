@@ -1,5 +1,5 @@
 import { AuthSignINCreds, AuthSignUPCreds } from "./../types/redux/auth";
-import { AudioData, AudioCreationCreds, ownerId } from "./../types/redux/audio";
+import { AudioData, AudioFormData, ownerId } from "./../types/redux/audio";
 import axios, { AxiosRequestConfig } from "axios";
 
 const BASE_URL = `http://${process.env.REACT_APP_PORT}`;
@@ -32,7 +32,7 @@ export const signUp = (formData: AuthSignUPCreds) =>
 
 export const fetchAllAudio = () => API_MEDIA.post("/audio");
 
-export const createAudioCard = (newAudioCard: AudioCreationCreds) =>
+export const createAudioCard = (newAudioCard: AudioFormData) =>
   API_MEDIA.post("/audio", newAudioCard);
 
 export const streamAudioFileSrc = (filename: string) =>
